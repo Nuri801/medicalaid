@@ -2,22 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:medicalaid/components/app_colors.dart';
 
 class AppThemes {
-
   static ThemeData get lightTheme => ThemeData(
-    primarySwatch: AppColors.primaryMaterialColor,
-    fontFamily: 'GmarketSansTTF',
-    textTheme: _textTheme,
-    scaffoldBackgroundColor: Colors.white,
-    splashColor: Colors.white,
-    brightness: Brightness.light,
-  );
+        primarySwatch: AppColors.primaryMaterialColor,
+        fontFamily: 'GmarketSansTTF',
+        textTheme: _textTheme,
+        scaffoldBackgroundColor: Colors.white,
+        splashColor: Colors.white,
+        appBarTheme: _appBarTheme,
+        brightness: Brightness.light,
+      );
 
   static ThemeData get darkTheme => ThemeData(
-    primarySwatch: AppColors.primaryMaterialColor,
-    fontFamily: 'GmarketSansTTF',
-    textTheme: _textTheme,
-    splashColor: Colors.white,
-    brightness: Brightness.dark,
+        primarySwatch: AppColors.primaryMaterialColor,
+        fontFamily: 'GmarketSansTTF',
+        textTheme: _textTheme,
+        splashColor: Colors.white,
+        brightness: Brightness.dark,
+      );
+
+  static const AppBarTheme _appBarTheme = AppBarTheme(
+    backgroundColor: Colors.white,
+    iconTheme: IconThemeData(
+      color: AppColors.primaryColor,
+    ),
+    elevation: 0,
   );
 
   static const TextTheme _textTheme = TextTheme(
