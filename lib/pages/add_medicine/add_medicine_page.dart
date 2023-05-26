@@ -31,29 +31,64 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
         onTap: () {
           FocusScope.of(context).unfocus();
         },
-        child: Padding(
-          padding: pagePadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: largeSpace),
-              Text(
-                '어떤 약이예요?',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: largeSpace),
-              Center(
-                child: CircleAvatar(
-                  radius: 40,
-                  child: CupertinoButton(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: pagePadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: largeSpace),
+                Text(
+                  '어떤 약이예요?',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(height: largeSpace),
+                Center(
+                  child: CircleAvatar(
+                    radius: 40,
+                    child: CupertinoButton(
                       padding: _pickedImage == null ? null : EdgeInsets.zero,
                       onPressed: () {
-                        ImagePicker().pickImage(source: ImageSource.gallery).then((xFile) {
-                          if (xFile == null) return;
-                          setState(() {
-                            _pickedImage = File(xFile.path);
-                          });
-                        });
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return SafeArea(
+                                child: Padding(
+                                  padding: pagePadding,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          ImagePicker().pickImage(source: ImageSource.camera).then((xFile) {
+                                            if (xFile != null) {
+                                              setState(() {
+                                                _pickedImage = File(xFile.path);
+                                              });
+                                            }
+                                            Navigator.maybePop(context);
+                                          });
+                                        },
+                                        child: const Text('카메라로 활영'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          ImagePicker().pickImage(source: ImageSource.gallery).then((xFile) {
+                                            if (xFile != null) {
+                                              setState(() {
+                                                _pickedImage = File(xFile.path);
+                                              });
+                                            }
+                                            Navigator.maybePop(context);
+                                          });
+                                        },
+                                        child: const Text('카메라로 활영'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
                       },
                       child: _pickedImage == null
                           ? const Icon(
@@ -64,27 +99,29 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
                           : CircleAvatar(
                               foregroundImage: FileImage(_pickedImage!),
                               radius: 40,
-                            )),
+                            ),
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(height: largeSpace + regularSpace),
-              Text(
-                '약 이름',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              TextFormField(
-                controller: _nameController,
-                maxLength: 20,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
-                style: Theme.of(context).textTheme.bodyLarge,
-                decoration: InputDecoration(
-                  hintText: '복용할 약 이름을 기입해주세요.',
-                  hintStyle: Theme.of(context).textTheme.bodyMedium,
-                  contentPadding: textFieldContentPadding,
+                const SizedBox(height: largeSpace + regularSpace),
+                Text(
+                  '약 이름',
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-              ),
-            ],
+                TextFormField(
+                  controller: _nameController,
+                  maxLength: 20,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  decoration: InputDecoration(
+                    hintText: '복용할 약 이름을 기입해주세요.',
+                    hintStyle: Theme.of(context).textTheme.bodyMedium,
+                    contentPadding: textFieldContentPadding,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -94,7 +131,9 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
           child: SizedBox(
             height: submitButtonHeight,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // do something here:
+              },
               style: ElevatedButton.styleFrom(textStyle: Theme.of(context).textTheme.titleMedium),
               child: const Text('다음'),
             ),
