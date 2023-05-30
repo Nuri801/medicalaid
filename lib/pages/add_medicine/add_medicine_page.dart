@@ -94,7 +94,6 @@ class MedicineImageButton extends StatefulWidget {
 }
 
 class _MedicineImageButtonState extends State<MedicineImageButton> {
-
   File? _pickedImage;
 
   @override
@@ -106,60 +105,70 @@ class _MedicineImageButtonState extends State<MedicineImageButton> {
         onPressed: _showBottomSheet,
         child: _pickedImage == null
             ? const Icon(
-          CupertinoIcons.photo_camera_solid,
-          size: 30,
-          color: Colors.white,
-        )
+                CupertinoIcons.photo_camera_solid,
+                size: 30,
+                color: Colors.white,
+              )
             : CircleAvatar(
-          foregroundImage: FileImage(_pickedImage!),
-          radius: 40,
-        ),
+                foregroundImage: FileImage(_pickedImage!),
+                radius: 40,
+              ),
       ),
     );
   }
 
   void _showBottomSheet() {
     showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return SafeArea(
-            child: Padding(
-              padding: pagePadding,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      ImagePicker().pickImage(source: ImageSource.camera).then((xFile) {
-                        if (xFile != null) {
-                          setState(() {
-                            _pickedImage = File(xFile.path);
-                          });
-                        }
-                        Navigator.maybePop(context);
-                      });
-                    },
-                    child: const Text('카메라로 활영'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      ImagePicker().pickImage(source: ImageSource.gallery).then((xFile) {
-                        if (xFile != null) {
-                          setState(() {
-                            _pickedImage = File(xFile.path);
-                          });
-                        }
-                        Navigator.maybePop(context);
-                      });
-                    },
-                    child: const Text('카메라로 활영'),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
+      context: context,
+      builder: (context) {
+        return PickImageBottomSheet(
+          onPressedCamera: () => _onPressed(ImageSource.camera),
+          onPressedGallery: () => _onPressed(ImageSource.gallery),
+        );
+      },
+    );
   }
 
+  void _onPressed(ImageSource source) {
+    ImagePicker().pickImage(source: source).then(
+      (xFile) {
+        if (xFile != null) {
+          setState(() {
+            _pickedImage = File(xFile.path);
+          });
+        }
+        Navigator.maybePop(context);
+      },
+    );
+  }
 }
 
+class PickImageBottomSheet extends StatelessWidget {
+  const PickImageBottomSheet({Key? key, required this.onPressedCamera, required this.onPressedGallery})
+      : super(key: key);
+
+  final VoidCallback onPressedCamera;
+  final VoidCallback onPressedGallery;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: pagePadding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+              onPressed: onPressedCamera,
+              child: const Text('카메라로 활영'),
+            ),
+            TextButton(
+              onPressed: onPressedGallery,
+              child: const Text('카메라로 활영'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
