@@ -103,6 +103,7 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
       ),
     );
   }
+
 }
 
 class MedicineImageButton extends StatefulWidget {
