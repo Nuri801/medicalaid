@@ -47,7 +47,7 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
                 Center(
                   child: MedicineImageButton(
                     changeImageFile: (File? value) {
-                      _medicineImage =value;
+                      _medicineImage = value;
                     },
                   ),
                 ),
@@ -103,7 +103,6 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
       ),
     );
   }
-
 }
 
 class MedicineImageButton extends StatefulWidget {
@@ -169,6 +168,7 @@ class _MedicineImageButtonState extends State<MedicineImageButton> {
   }
 }
 
+
 class PickImageBottomSheet extends StatelessWidget {
   const PickImageBottomSheet({Key? key, required this.onPressedCamera, required this.onPressedGallery})
       : super(key: key);
@@ -197,5 +197,4 @@ class PickImageBottomSheet extends StatelessWidget {
       ),
     );
   }
-
 }
