@@ -119,7 +119,6 @@ class MedicineImageButton extends StatefulWidget {
 }
 
 class _MedicineImageButtonState extends State<MedicineImageButton> {
-
   File? _pickedImage;
 
   @override
