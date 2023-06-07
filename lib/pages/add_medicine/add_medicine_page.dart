@@ -105,7 +105,6 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
   }
 }
 
-
 class MedicineImageButton extends StatefulWidget {
   const MedicineImageButton({
     Key? key,
@@ -117,7 +116,6 @@ class MedicineImageButton extends StatefulWidget {
   @override
   State<MedicineImageButton> createState() => _MedicineImageButtonState();
 }
-
 
 class _MedicineImageButtonState extends State<MedicineImageButton> {
 
