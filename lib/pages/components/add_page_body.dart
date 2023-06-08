@@ -13,13 +13,11 @@ class AddPageBody extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: pagePadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: children,
-          ),
+      child: Padding(
+        padding: pagePadding,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: children,
         ),
       ),
     );

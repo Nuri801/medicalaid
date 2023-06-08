@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medicalaid/components/app_constants.dart';
 import 'package:medicalaid/pages/components/add_page_body.dart';
@@ -26,11 +27,37 @@ class AddAlarmPage extends StatelessWidget {
           const SizedBox(
             height: largeSpace,
           ),
-
+          Expanded(
+            child: ListView(
+              children: [
+                AlarmBox(),
+                AlarmBox(),
+                AlarmBox(),
+                AlarmBox(),
+                AlarmBox(),
+              ],
+            ),
+          ),
           // medicineImage == null ? Container() : Image.file(medicineImage!),
           // Text(medicineName),
         ],
       ),
+    );
+  }
+}
+
+class AlarmBox extends StatelessWidget {
+  const AlarmBox({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.minus_circle)),
+        Expanded(child: TextButton(onPressed: () {}, child: Text('18:00'))),
+      ],
     );
   }
 }
