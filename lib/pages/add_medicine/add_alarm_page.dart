@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medicalaid/components/app_constants.dart';
-import 'package:medicalaid/pages/components/add_page_body.dart';
+import 'package:medicalaid/pages/components/add_page_widgets.dart';
 
 class AddAlarmPage extends StatelessWidget {
   const AddAlarmPage({
@@ -42,6 +42,10 @@ class AddAlarmPage extends StatelessWidget {
           // medicineImage == null ? Container() : Image.file(medicineImage!),
           // Text(medicineName),
         ],
+      ),
+      bottomNavigationBar: BottomSubmitButton(
+        onPressed: () {},
+        text: '완료',
       ),
     );
   }

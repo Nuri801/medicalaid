@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medicalaid/components/app_constants.dart';
 import 'package:medicalaid/pages/add_medicine/add_alarm_page.dart';
-import 'package:medicalaid/pages/components/add_page_body.dart';
+import 'package:medicalaid/pages/components/add_page_widgets.dart';
 
 class AddMedicinePage extends StatefulWidget {
   const AddMedicinePage({Key? key}) : super(key: key);
@@ -68,18 +68,9 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
           ],
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: submitButtonPadding,
-          child: SizedBox(
-            height: submitButtonHeight,
-            child: ElevatedButton(
-              onPressed: _nameController.text.isEmpty ? null : _onAddAlarmPage,
-              style: ElevatedButton.styleFrom(textStyle: Theme.of(context).textTheme.titleMedium),
-              child: const Text('다음'),
-            ),
-          ),
-        ),
+      bottomNavigationBar: BottomSubmitButton(
+        onPressed: _nameController.text.isEmpty ? null : _onAddAlarmPage,
+        text: '다음',
       ),
     );
   }
