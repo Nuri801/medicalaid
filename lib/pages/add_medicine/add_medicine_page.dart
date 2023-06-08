@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medicalaid/components/app_constants.dart';
 import 'package:medicalaid/pages/add_medicine/add_alarm_page.dart';
+import 'package:medicalaid/pages/components/add_page_body.dart';
 
 class AddMedicinePage extends StatefulWidget {
   const AddMedicinePage({Key? key}) : super(key: key);
@@ -28,53 +29,42 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
       appBar: AppBar(
         leading: const CloseButton(),
       ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: pagePadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: largeSpace),
-                Text(
-                  '어떤 약이예요?',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(height: largeSpace),
-                Center(
-                  child: MedicineImageButton(
-                    changeImageFile: (File? value) {
-                      _medicineImage = value;
-                    },
-                  ),
-                ),
-                const SizedBox(height: largeSpace + regularSpace),
-                Text(
-                  '약 이름',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                TextFormField(
-                  controller: _nameController,
-                  maxLength: 20,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.done,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  decoration: InputDecoration(
-                    hintText: '복용할 약 이름을 기입해주세요.',
-                    hintStyle: Theme.of(context).textTheme.bodyMedium,
-                    contentPadding: textFieldContentPadding,
-                  ),
-                  onChanged: (_) {
-                    setState(() {});
-                  },
-                ),
-              ],
+      body: AddPageBody(
+        children: [
+          const SizedBox(height: largeSpace),
+          Text(
+            '어떤 약이예요?',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const SizedBox(height: largeSpace),
+          Center(
+            child: MedicineImageButton(
+              changeImageFile: (File? value) {
+                _medicineImage = value;
+              },
             ),
           ),
-        ),
+          const SizedBox(height: largeSpace + regularSpace),
+          Text(
+            '약 이름',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          TextFormField(
+            controller: _nameController,
+            maxLength: 20,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.done,
+            style: Theme.of(context).textTheme.bodyLarge,
+            decoration: InputDecoration(
+              hintText: '복용할 약 이름을 기입해주세요.',
+              hintStyle: Theme.of(context).textTheme.bodyMedium,
+              contentPadding: textFieldContentPadding,
+            ),
+            onChanged: (_) {
+              setState(() {});
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
@@ -118,7 +108,6 @@ class MedicineImageButton extends StatefulWidget {
 }
 
 class _MedicineImageButtonState extends State<MedicineImageButton> {
-
   File? _pickedImage;
 
   @override
