@@ -35,6 +35,7 @@ class AddAlarmPage extends StatelessWidget {
                 AlarmBox(),
                 AlarmBox(),
                 AlarmBox(),
+                AddAlarmBox(),
               ],
             ),
           ),
@@ -55,9 +56,61 @@ class AlarmBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.minus_circle)),
-        Expanded(child: TextButton(onPressed: () {}, child: Text('18:00'))),
+        Expanded(
+          flex: 1,
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              CupertinoIcons.minus_circle,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 5,
+          child: TextButton(
+            onPressed: () {},
+            child: Text(
+              '18:00',
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+          ),
+        ),
       ],
+    );
+  }
+}
+
+class AddAlarmBox extends StatelessWidget {
+  const AddAlarmBox({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
+        textStyle: Theme.of(context).textTheme.titleMedium,
+      ),
+      onPressed: () {},
+      child: const Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Icon(
+              CupertinoIcons.plus_circle_fill,
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Center(
+              child: Text(
+                '복용시간 추가',
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
