@@ -44,7 +44,11 @@ class AddAlarmPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomSubmitButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(context: context, builder: (context) {
+            return Column();
+          });
+        },
         text: '완료',
       ),
     );
