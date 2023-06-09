@@ -6,6 +6,8 @@ import 'package:medicalaid/components/app_constants.dart';
 import 'package:medicalaid/pages/add_medicine/add_alarm_page.dart';
 import 'package:medicalaid/pages/components/add_page_widgets.dart';
 
+import '../../components/app_widgets.dart';
+
 class AddMedicinePage extends StatefulWidget {
   const AddMedicinePage({Key? key}) : super(key: key);
 
@@ -160,23 +162,17 @@ class PickImageBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: pagePadding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextButton(
-              onPressed: onPressedCamera,
-              child: const Text('카메라로 활영'),
-            ),
-            TextButton(
-              onPressed: onPressedGallery,
-              child: const Text('카메라로 활영'),
-            ),
-          ],
+    return BottomSheetBody(
+      children: [
+        TextButton(
+          onPressed: onPressedCamera,
+          child: const Text('카메라로 활영'),
         ),
-      ),
+        TextButton(
+          onPressed: onPressedGallery,
+          child: const Text('카메라로 활영'),
+        ),
+      ],
     );
   }
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medicalaid/components/app_constants.dart';
+import 'package:medicalaid/components/app_widgets.dart';
 import 'package:medicalaid/pages/components/add_page_widgets.dart';
 
 class AddAlarmPage extends StatelessWidget {
@@ -46,7 +47,9 @@ class AddAlarmPage extends StatelessWidget {
       bottomNavigationBar: BottomSubmitButton(
         onPressed: () {
           showModalBottomSheet(context: context, builder: (context) {
-            return Column();
+            return BottomSheetBody(children: [
+
+            ]);
           });
         },
         text: '완료',
