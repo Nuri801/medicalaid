@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:medicalaid/components/app_constants.dart';
 import 'package:medicalaid/components/app_widgets.dart';
 import 'package:medicalaid/pages/components/add_page_widgets.dart';
@@ -22,7 +23,7 @@ class AddAlarmPage extends StatefulWidget {
 }
 
 class _AddAlarmPageState extends State<AddAlarmPage> {
-  final alarms = <String>{'08:00', '13:00', '19:00'};
+  final _alarms = <String>{'08:00', '13:00', '19:00'};
 
   @override
   Widget build(BuildContext context) {
@@ -56,24 +57,34 @@ class _AddAlarmPageState extends State<AddAlarmPage> {
   List<Widget> get alarmWidgets {
     final children = <Widget>[];
     children.addAll(
-      alarms.map(
+      _alarms.map(
         (alarmTime) => AlarmBox(
           time: alarmTime,
           onPressedMinus: () {
             setState(() {
-              alarms.remove(alarmTime);
+              _alarms.remove(alarmTime);
             });
           },
         ),
       ),
     );
-    children.add(const AddAlarmButton());
+    children.add(
+      AddAlarmButton(
+        onPressed: () {
+          final now = DateTime.now();
+          final nowTime = DateFormat('HH:mm').format(now);
+          setState(() {
+            _alarms.add(nowTime);
+          });
+        },
+      ),
+    );
     return children;
   }
 }
 
 class AlarmBox extends StatelessWidget {
-  AlarmBox({
+  const AlarmBox({
     super.key,
     required this.time,
     required this.onPressedMinus,
@@ -84,6 +95,8 @@ class AlarmBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final initTime = DateFormat('HH:mm').parse(time);
+
     return Row(
       children: [
         Expanded(
@@ -102,7 +115,9 @@ class AlarmBox extends StatelessWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return const TimiPickerBottomSheet();
+                  return TimiPickerBottomSheet(
+                    initialDateTime: initTime,
+                  );
                 },
               );
             },
@@ -120,7 +135,10 @@ class AlarmBox extends StatelessWidget {
 class TimiPickerBottomSheet extends StatelessWidget {
   const TimiPickerBottomSheet({
     super.key,
+    required this.initialDateTime,
   });
+
+  final DateTime initialDateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -131,6 +149,7 @@ class TimiPickerBottomSheet extends StatelessWidget {
           child: CupertinoDatePicker(
             onDateTimeChanged: (dateTime) {},
             mode: CupertinoDatePickerMode.time,
+            initialDateTime: initialDateTime,
           ),
         ),
         const SizedBox(
@@ -177,7 +196,10 @@ class TimiPickerBottomSheet extends StatelessWidget {
 class AddAlarmButton extends StatelessWidget {
   const AddAlarmButton({
     super.key,
+    required this.onPressed,
   });
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +208,7 @@ class AddAlarmButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
         textStyle: Theme.of(context).textTheme.titleMedium,
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: const Row(
         children: [
           Expanded(
