@@ -32,7 +32,9 @@ class AddAlarmPage extends StatelessWidget {
             child: ListView(
               children: [
                 AlarmBox(),
+
                 AlarmBox(),
+
                 AlarmBox(),
                 AlarmBox(),
                 AlarmBox(),
