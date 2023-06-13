@@ -8,7 +8,7 @@ import 'package:medicalaid/pages/components/add_page_widgets.dart';
 import '../../components/app_colors.dart';
 
 class AddAlarmPage extends StatelessWidget {
-  const AddAlarmPage({
+  AddAlarmPage({
     Key? key,
     required this.medicineImage,
     required this.medicineName,
@@ -16,6 +16,11 @@ class AddAlarmPage extends StatelessWidget {
 
   final File? medicineImage;
   final String medicineName;
+  final alarms = <String>{
+    '08:00',
+    '13:00',
+    '19:00'
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +37,7 @@ class AddAlarmPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              children: [
-                AlarmBox(),
-                AlarmBox(),
-                AlarmBox(),
-                AlarmBox(),
-                AlarmBox(),
-                AddAlarmBox(),
-              ],
+              children: alarmWidget,
             ),
           ),
           // medicineImage == null ? Container() : Image.file(medicineImage!),
@@ -47,70 +45,27 @@ class AddAlarmPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomSubmitButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return BottomSheetBody(
-                children: [
-                  SizedBox(
-                    height: 200,
-                    child: CupertinoDatePicker(
-                      onDateTimeChanged: (dateTime) {},
-                      mode: CupertinoDatePickerMode.time,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: regularSpace,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: submitButtonHeight,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: AppColors.primaryColor,
-                              textStyle: Theme.of(context).textTheme.titleMedium,
-                              backgroundColor: Colors.white,
-                            ),
-                            child: const Text('취소'),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: smallSpace,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          height: submitButtonHeight,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              textStyle: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            child: const Text('선택'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            },
-          );
-        },
+        onPressed: () {},
         text: '완료',
       ),
     );
   }
+
+  List<Widget> get alarmWidget {
+    final children = <Widget>[];
+    children.addAll(alarms.map((alarmTime) => AlarmBox(time: alarmTime)));
+    children.add(const AddAlarmButton());
+    return children;
+  }
+
 }
 
 class AlarmBox extends StatelessWidget {
   const AlarmBox({
-    super.key,
+    super.key, required this.time,
   });
+
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +74,9 @@ class AlarmBox extends StatelessWidget {
         Expanded(
           flex: 1,
           child: IconButton(
-            onPressed: () {},
+            onPressed:() {
+
+            },
             icon: const Icon(
               CupertinoIcons.minus_circle,
             ),
@@ -128,9 +85,16 @@ class AlarmBox extends StatelessWidget {
         Expanded(
           flex: 5,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return const TimiPickerBottomSheet();
+                },
+              );
+            },
             child: Text(
-              '18:00',
+              time,
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
@@ -140,8 +104,65 @@ class AlarmBox extends StatelessWidget {
   }
 }
 
-class AddAlarmBox extends StatelessWidget {
-  const AddAlarmBox({
+class TimiPickerBottomSheet extends StatelessWidget {
+  const TimiPickerBottomSheet({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomSheetBody(
+      children: [
+        SizedBox(
+          height: 200,
+          child: CupertinoDatePicker(
+            onDateTimeChanged: (dateTime) {},
+            mode: CupertinoDatePickerMode.time,
+          ),
+        ),
+        const SizedBox(
+          height: regularSpace,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: submitButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: AppColors.primaryColor,
+                    textStyle: Theme.of(context).textTheme.titleMedium,
+                    backgroundColor: Colors.white,
+                  ),
+                  child: const Text('취소'),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: smallSpace,
+            ),
+            Expanded(
+              child: SizedBox(
+                height: submitButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    textStyle: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  child: const Text('선택'),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class AddAlarmButton extends StatelessWidget {
+  const AddAlarmButton({
     super.key,
   });
 
