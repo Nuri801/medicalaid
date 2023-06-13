@@ -7,8 +7,8 @@ import 'package:medicalaid/pages/components/add_page_widgets.dart';
 
 import '../../components/app_colors.dart';
 
-class AddAlarmPage extends StatelessWidget {
-  AddAlarmPage({
+class AddAlarmPage extends StatefulWidget {
+  const AddAlarmPage({
     Key? key,
     required this.medicineImage,
     required this.medicineName,
@@ -16,11 +16,13 @@ class AddAlarmPage extends StatelessWidget {
 
   final File? medicineImage;
   final String medicineName;
-  final alarms = <String>{
-    '08:00',
-    '13:00',
-    '19:00'
-  };
+
+  @override
+  State<AddAlarmPage> createState() => _AddAlarmPageState();
+}
+
+class _AddAlarmPageState extends State<AddAlarmPage> {
+  final alarms = <String>{'08:00', '13:00', '19:00'};
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class AddAlarmPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              children: alarmWidget,
+              children: alarmWidgets,
             ),
           ),
           // medicineImage == null ? Container() : Image.file(medicineImage!),
@@ -51,21 +53,34 @@ class AddAlarmPage extends StatelessWidget {
     );
   }
 
-  List<Widget> get alarmWidget {
+  List<Widget> get alarmWidgets {
     final children = <Widget>[];
-    children.addAll(alarms.map((alarmTime) => AlarmBox(time: alarmTime)));
+    children.addAll(
+      alarms.map(
+        (alarmTime) => AlarmBox(
+          time: alarmTime,
+          onPressedMinus: () {
+            setState(() {
+              alarms.remove(alarmTime);
+            });
+          },
+        ),
+      ),
+    );
     children.add(const AddAlarmButton());
     return children;
   }
-
 }
 
 class AlarmBox extends StatelessWidget {
-  const AlarmBox({
-    super.key, required this.time,
+  AlarmBox({
+    super.key,
+    required this.time,
+    required this.onPressedMinus,
   });
 
   final String time;
+  final VoidCallback onPressedMinus;
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +89,7 @@ class AlarmBox extends StatelessWidget {
         Expanded(
           flex: 1,
           child: IconButton(
-            onPressed:() {
-
-            },
+            onPressed: onPressedMinus,
             icon: const Icon(
               CupertinoIcons.minus_circle,
             ),
