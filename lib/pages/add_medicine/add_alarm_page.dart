@@ -32,13 +32,9 @@ class AddAlarmPage extends StatelessWidget {
             child: ListView(
               children: [
                 AlarmBox(),
-
                 AlarmBox(),
-
                 AlarmBox(),
-
                 AlarmBox(),
-
                 AlarmBox(),
                 AddAlarmBox(),
               ],
@@ -50,11 +46,21 @@ class AddAlarmPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomSubmitButton(
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (context) {
-            return BottomSheetBody(children: [
-
-            ]);
-          });
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return BottomSheetBody(
+                children: [
+                  SizedBox(
+                    height: 400,
+                    child: CupertinoDatePicker(
+                      onDateTimeChanged: (dateTime) {},
+                    ),
+                  )
+                ],
+              );
+            },
+          );
         },
         text: '완료',
       ),
