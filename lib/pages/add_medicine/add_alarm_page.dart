@@ -5,6 +5,8 @@ import 'package:medicalaid/components/app_constants.dart';
 import 'package:medicalaid/components/app_widgets.dart';
 import 'package:medicalaid/pages/components/add_page_widgets.dart';
 
+import '../../components/app_colors.dart';
+
 class AddAlarmPage extends StatelessWidget {
   const AddAlarmPage({
     Key? key,
@@ -52,11 +54,48 @@ class AddAlarmPage extends StatelessWidget {
               return BottomSheetBody(
                 children: [
                   SizedBox(
-                    height: 400,
+                    height: 200,
                     child: CupertinoDatePicker(
                       onDateTimeChanged: (dateTime) {},
+                      mode: CupertinoDatePickerMode.time,
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: regularSpace,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: submitButtonHeight,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: AppColors.primaryColor,
+                              textStyle: Theme.of(context).textTheme.titleMedium,
+                              backgroundColor: Colors.white,
+                            ),
+                            child: const Text('취소'),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: smallSpace,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: submitButtonHeight,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              textStyle: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            child: const Text('선택'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               );
             },
