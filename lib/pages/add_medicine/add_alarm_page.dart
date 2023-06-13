@@ -36,7 +36,9 @@ class AddAlarmPage extends StatelessWidget {
                 AlarmBox(),
 
                 AlarmBox(),
+
                 AlarmBox(),
+
                 AlarmBox(),
                 AddAlarmBox(),
               ],
