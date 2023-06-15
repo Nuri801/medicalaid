@@ -5,10 +5,11 @@ import 'package:intl/intl.dart';
 import 'package:medicalaid/components/app_constants.dart';
 import 'package:medicalaid/components/app_widgets.dart';
 import 'package:medicalaid/pages/components/add_page_widgets.dart';
+import 'package:medicalaid/services/add_medicine_service.dart';
 import '../../components/app_colors.dart';
 
-class AddAlarmPage extends StatefulWidget {
-  const AddAlarmPage({
+class AddAlarmPage extends StatelessWidget {
+  AddAlarmPage({
     Key? key,
     required this.medicineImage,
     required this.medicineName,
@@ -16,13 +17,7 @@ class AddAlarmPage extends StatefulWidget {
 
   final File? medicineImage;
   final String medicineName;
-
-  @override
-  State<AddAlarmPage> createState() => _AddAlarmPageState();
-}
-
-class _AddAlarmPageState extends State<AddAlarmPage> {
-  final _alarms = <String>{'08:00', '13:00', '19:00'};
+  final service = AddMedicineService();
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +33,15 @@ class _AddAlarmPageState extends State<AddAlarmPage> {
             height: largeSpace,
           ),
           Expanded(
-            child: ListView(
-              children: alarmWidgets,
+            child: AnimatedBuilder(
+              animation: service,
+              builder: (context, _) {
+                return ListView(
+                  children: alarmWidgets,
+                );
+              },
             ),
           ),
-          // medicineImage == null ? Container() : Image.file(medicineImage!),
-          // Text(medicineName),
         ],
       ),
       bottomNavigationBar: BottomSubmitButton(
@@ -56,26 +54,16 @@ class _AddAlarmPageState extends State<AddAlarmPage> {
   List<Widget> get alarmWidgets {
     final children = <Widget>[];
     children.addAll(
-      _alarms.map(
+      service.alarms.map(
         (alarmTime) => AlarmBox(
           time: alarmTime,
-          onPressedMinus: () {
-            setState(() {
-              _alarms.remove(alarmTime);
-            });
-          },
+          service: service,
         ),
       ),
     );
     children.add(
       AddAlarmButton(
-        onPressed: () {
-          final now = DateTime.now();
-          final nowTime = DateFormat('HH:mm').format(now);
-          setState(() {
-            _alarms.add(nowTime);
-          });
-        },
+        service: service,
       ),
     );
     return children;
@@ -86,12 +74,11 @@ class AlarmBox extends StatelessWidget {
   const AlarmBox({
     super.key,
     required this.time,
-    required this.onPressedMinus,
+    required this.service,
   });
 
   final String time;
-  final VoidCallback onPressedMinus;
-
+  final AddMedicineService service;
   @override
   Widget build(BuildContext context) {
     final initTime = DateFormat('HH:mm').parse(time);
@@ -101,7 +88,9 @@ class AlarmBox extends StatelessWidget {
         Expanded(
           flex: 1,
           child: IconButton(
-            onPressed: onPressedMinus,
+            onPressed: () {
+              service.removeAlarm(time);
+            },
             icon: const Icon(
               CupertinoIcons.minus_circle,
             ),
@@ -195,10 +184,10 @@ class TimiPickerBottomSheet extends StatelessWidget {
 class AddAlarmButton extends StatelessWidget {
   const AddAlarmButton({
     super.key,
-    required this.onPressed,
+    required this.service,
   });
 
-  final VoidCallback onPressed;
+  final AddMedicineService service;
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +196,7 @@ class AddAlarmButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
         textStyle: Theme.of(context).textTheme.titleMedium,
       ),
-      onPressed: onPressed,
+      onPressed: service.addNowAlarm,
       child: const Row(
         children: [
           Expanded(
