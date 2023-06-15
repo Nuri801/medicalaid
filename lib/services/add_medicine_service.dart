@@ -17,5 +17,4 @@ class AddMedicineService with ChangeNotifier {
     _alarms.remove(alarmTime);
     notifyListeners();
   }
-
 }
