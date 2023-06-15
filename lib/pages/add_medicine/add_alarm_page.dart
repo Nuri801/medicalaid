@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:medicalaid/components/app_constants.dart';
 import 'package:medicalaid/components/app_widgets.dart';
 import 'package:medicalaid/pages/components/add_page_widgets.dart';
-
 import '../../components/app_colors.dart';
 
 class AddAlarmPage extends StatefulWidget {
