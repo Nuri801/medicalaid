@@ -150,7 +150,7 @@ class TimiPickerBottomSheet extends StatelessWidget {
               child: SizedBox(
                 height: submitButtonHeight,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: AppColors.primaryColor,
                     textStyle: Theme.of(context).textTheme.titleMedium,
