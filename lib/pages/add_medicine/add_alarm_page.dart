@@ -51,7 +51,6 @@ class AddAlarmPage extends StatelessWidget {
     );
   }
 
-
   List<Widget> get alarmWidgets {
     final children = <Widget>[];
     children.addAll(
@@ -71,6 +70,11 @@ class AddAlarmPage extends StatelessWidget {
   }
 }
 
+// I think the following structure of having separate classes for widgets
+// is not necessary as we have to pass down the State controller object to each class.
+// But that is what the instructor did.
+// A better way would be to create methods with a return type of Widget inside one class,
+// thus being able to access the manager object from anywhere without having to pass down.
 class AlarmBox extends StatelessWidget {
   const AlarmBox({
     super.key,
@@ -82,8 +86,6 @@ class AlarmBox extends StatelessWidget {
   final AddMedicineService service;
   @override
   Widget build(BuildContext context) {
-    final initTime = DateFormat('HH:mm').parse(time);
-
     return Row(
       children: [
         Expanded(
@@ -105,7 +107,8 @@ class AlarmBox extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return TimiPickerBottomSheet(
-                    initialDateTime: initTime,
+                    initialTime: time,
+                    service: service,
                   );
                 },
               );
@@ -124,13 +127,16 @@ class AlarmBox extends StatelessWidget {
 class TimiPickerBottomSheet extends StatelessWidget {
   const TimiPickerBottomSheet({
     super.key,
-    required this.initialDateTime,
+    required this.initialTime,
+    required this.service,
   });
 
-  final DateTime initialDateTime;
+  final String initialTime;
+  final AddMedicineService service;
 
   @override
   Widget build(BuildContext context) {
+    final initialDateTime = DateFormat('HH:mm').parse(initialTime);
     return BottomSheetBody(
       children: [
         SizedBox(
