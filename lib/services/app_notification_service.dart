@@ -5,10 +5,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class AppNotificationService {
-
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-
 
   Future<void> initializeLocalNotification() async {
     // time zone
@@ -16,10 +13,8 @@ class AppNotificationService {
     final timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName));
 
-
     // notification InitializationSettings
-    const initializationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const initializationSettingsIOS = IOSInitializationSettings(
       requestAlertPermission: true,
@@ -35,6 +30,16 @@ class AppNotificationService {
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
     );
+  }
+
+  Future<bool> addNotification({
+    required DateTime alarmTime,
+    required String title,
+    required String body,
+  }) async {
+
+    // if (!await permissionNotif)
+
   }
 
 }

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:medicalaid/services/app_notification_service.dart';
 import 'components/app_themes.dart';
 import 'package:medicalaid/pages/home_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final notification = AppNotificationService();
+  notification.initializeLocalNotification();
+
   runApp(const MyApp());
 }
 
