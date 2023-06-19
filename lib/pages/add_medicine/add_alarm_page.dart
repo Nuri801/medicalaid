@@ -124,8 +124,9 @@ class AlarmBox extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class TimiPickerBottomSheet extends StatelessWidget {
-  const TimiPickerBottomSheet({
+  TimiPickerBottomSheet({
     super.key,
     required this.initialTime,
     required this.service,
@@ -133,6 +134,7 @@ class TimiPickerBottomSheet extends StatelessWidget {
 
   final String initialTime;
   final AddMedicineService service;
+  DateTime? _setDateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +144,9 @@ class TimiPickerBottomSheet extends StatelessWidget {
         SizedBox(
           height: 200,
           child: CupertinoDatePicker(
-            onDateTimeChanged: (dateTime) {},
+            onDateTimeChanged: (dateTime) {
+              _setDateTime = dateTime;
+            },
             mode: CupertinoDatePickerMode.time,
             initialDateTime: initialDateTime,
           ),
@@ -173,10 +177,16 @@ class TimiPickerBottomSheet extends StatelessWidget {
               child: SizedBox(
                 height: submitButtonHeight,
                 child: ElevatedButton(
-                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     textStyle: Theme.of(context).textTheme.titleMedium,
                   ),
+                  onPressed: () {
+                    service.setAlarm(
+                      prevTime: initialTime,
+                      setTime: _setDateTime ?? initialDateTime,
+                    );
+                    Navigator.pop(context);
+                  },
                   child: const Text('선택'),
                 ),
               ),
