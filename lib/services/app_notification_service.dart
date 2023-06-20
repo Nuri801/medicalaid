@@ -38,8 +38,6 @@ class AppNotificationService {
     required String body,
   }) async {
 
-    // if (!await permissionNotif)
-
   }
 
 }
