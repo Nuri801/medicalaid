@@ -6,7 +6,6 @@ import 'package:timezone/timezone.dart' as tz;
 
 class AppNotificationService {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
   Future<void> initializeLocalNotification() async {
     // time zone
     tz.initializeTimeZones();
@@ -31,7 +30,6 @@ class AppNotificationService {
       initializationSettings,
     );
   }
-
   Future<bool> addNotification({
     required DateTime alarmTime,
     required String title,
