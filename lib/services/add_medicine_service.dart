@@ -19,7 +19,6 @@ class AddMedicineService with ChangeNotifier {
     notifyListeners();
   }
 
-
   void setAlarm ({required String prevTime, required DateTime setTime}) {
     _alarms.remove(prevTime);
     final setTimeStr = DateFormat("HH:mm").format(setTime);
