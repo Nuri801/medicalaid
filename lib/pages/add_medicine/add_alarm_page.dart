@@ -80,7 +80,6 @@ class AddAlarmPage extends StatelessWidget {
 // A better way would be to create methods with a return type of Widget inside one class,
 // thus being able to access the manager object from anywhere without having to pass down.
 
-
 class AlarmBox extends StatelessWidget {
   const AlarmBox({
     super.key,
