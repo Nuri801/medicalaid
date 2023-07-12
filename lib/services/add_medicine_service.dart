@@ -13,7 +13,6 @@ class AddMedicineService with ChangeNotifier {
     notifyListeners();
   }
 
-
   void removeAlarm(String alarmTime) {
     _alarms.remove(alarmTime);
     notifyListeners();
