@@ -207,9 +207,7 @@ class AddAlarmButton extends StatelessWidget {
     super.key,
     required this.service,
   });
-
   final AddMedicineService service;
-
   @override
   Widget build(BuildContext context) {
     return TextButton(
