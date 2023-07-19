@@ -74,6 +74,7 @@ class AddAlarmPage extends StatelessWidget {
   }
 }
 
+
 // I think the following structure of having separate classes for widgets
 // is not necessary as we have to pass down the State controller object to each class.
 // But that is what the instructor did.
