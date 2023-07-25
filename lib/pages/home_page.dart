@@ -70,7 +70,6 @@ class _HomePageState extends State<HomePage> {
         );
   }
 
-
   void _onCurrentPage(int index) {
     setState(() {
       _currentIndex = index;
@@ -80,7 +79,7 @@ class _HomePageState extends State<HomePage> {
   void _onAddMedicine() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AddMedicinePage()),
+      MaterialPageRoute(builder: (context) => const AddMedicinePage()),
     );
   }
 }
