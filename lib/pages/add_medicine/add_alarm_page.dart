@@ -107,6 +107,7 @@ class AlarmBox extends StatelessWidget {
           ),
         ),
         Expanded(
+
           flex: 5,
           child: TextButton(
             onPressed: () {
