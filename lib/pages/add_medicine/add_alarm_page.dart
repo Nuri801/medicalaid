@@ -8,6 +8,7 @@ import 'package:medicalaid/pages/components/add_page_widgets.dart';
 import 'package:medicalaid/services/add_medicine_service.dart';
 import '../../components/app_colors.dart';
 
+
 class AddAlarmPage extends StatelessWidget {
   AddAlarmPage({
     Key? key,
@@ -75,13 +76,11 @@ class AddAlarmPage extends StatelessWidget {
   }
 }
 
-
 // I think the following structure of having separate classes for widgets
 // is not necessary as we have to pass down the State controller object to each class.
 // But that is what the instructor did.
 // A better way would be to create methods with a return type of Widget inside one class,
 // thus being able to access the manager object from anywhere without having to pass down.
-
 
 class AlarmBox extends StatelessWidget {
   const AlarmBox({
@@ -107,7 +106,6 @@ class AlarmBox extends StatelessWidget {
           ),
         ),
         Expanded(
-
           flex: 5,
           child: TextButton(
             onPressed: () {
@@ -131,7 +129,6 @@ class AlarmBox extends StatelessWidget {
     );
   }
 }
-
 
 // ignore: must_be_immutable
 class TimiPickerBottomSheet extends StatelessWidget {
