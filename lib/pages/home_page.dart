@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
   BottomAppBar _buildBottomAppBar() {
     return BottomAppBar(
           elevation: 0,
