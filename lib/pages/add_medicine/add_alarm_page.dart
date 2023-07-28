@@ -15,13 +15,9 @@ class AddAlarmPage extends StatelessWidget {
     required this.medicineImage,
     required this.medicineName,
   }) : super(key: key);
-
-
   final File? medicineImage;
   final String medicineName;
   final service = AddMedicineService();
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
