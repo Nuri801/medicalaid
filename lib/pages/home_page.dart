@@ -18,9 +18,7 @@ class _HomePageState extends State<HomePage> {
     const HistoryPage(),
   ];
 
-
   int _currentIndex = 0;
-
 
   @override
   Widget build(BuildContext context) {
