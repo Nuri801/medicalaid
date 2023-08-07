@@ -12,6 +12,7 @@ class AppThemes {
         brightness: Brightness.light,
       );
 
+
   static ThemeData get darkTheme => ThemeData(
         primarySwatch: AppColors.primaryMaterialColor,
         fontFamily: 'GmarketSansTTF',
