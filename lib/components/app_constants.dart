@@ -13,3 +13,4 @@ const EdgeInsetsGeometry textFieldContentPadding = EdgeInsets.symmetric(horizont
 const EdgeInsetsGeometry pagePadding = EdgeInsets.all(20.0);
 
 const EdgeInsetsGeometry submitButtonPadding = EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0);
+
