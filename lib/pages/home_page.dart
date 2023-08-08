@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
     const TodayPage(),
     const HistoryPage(),
   ];
-
   int _currentIndex = 0;
 
   @override
