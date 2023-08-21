@@ -200,8 +200,6 @@ class TimiPickerBottomSheet extends StatelessWidget {
   }
 }
 
-
-
 class AddAlarmButton extends StatelessWidget {
 
   const AddAlarmButton({
