@@ -75,8 +75,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-
-
   void _onAddMedicine() {
     Navigator.push(
       context,
